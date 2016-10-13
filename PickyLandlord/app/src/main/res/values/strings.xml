@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PickyLandlord</string>
+    <string name="enter_crime_title">Enter crime title here</string>
 </resources>
