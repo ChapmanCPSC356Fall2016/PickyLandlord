@@ -1,10 +1,18 @@
 package edu.chapman.cpsc356.pickylandlord.models;
 
+import org.joda.time.DateTime;
+
 public class CrimeModel
 {
     private String text;
-    private boolean solved = false;
+    private DateTime date;
+    private boolean solved;
 
+    public CrimeModel()
+    {
+        this.date = DateTime.now();
+        this.solved = false;
+    }
 
     public String getText()
     {
@@ -24,5 +32,10 @@ public class CrimeModel
     public void setSolved(boolean solved)
     {
         this.solved = solved;
+    }
+
+    public DateTime getDate()
+    {
+        return date;
     }
 }

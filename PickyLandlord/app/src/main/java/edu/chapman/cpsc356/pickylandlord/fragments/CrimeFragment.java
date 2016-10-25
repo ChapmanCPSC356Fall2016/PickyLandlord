@@ -10,8 +10,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import org.joda.time.format.DateTimeFormat;
+
+import edu.chapman.cpsc356.pickylandlord.CrimeCollection;
 import edu.chapman.cpsc356.pickylandlord.R;
 import edu.chapman.cpsc356.pickylandlord.models.CrimeModel;
 
@@ -20,6 +26,8 @@ public class CrimeFragment extends Fragment
     private CrimeModel crime;
 
     private EditText textEditText;
+    private Button dateButton;
+    private CheckBox solvedCheckBox;
 
     public CrimeFragment()
     {
@@ -34,6 +42,8 @@ public class CrimeFragment extends Fragment
         View fragmentView = inflater.inflate(R.layout.fragment_crime, container, false);
 
         this.textEditText = (EditText) fragmentView.findViewById(R.id.et_text);
+        this.dateButton = (Button) fragmentView.findViewById(R.id.btn_date);
+        this.solvedCheckBox = (CheckBox) fragmentView.findViewById(R.id.cb_solved);
 
         this.textEditText.addTextChangedListener(new TextWatcher()
         {
@@ -49,11 +59,23 @@ public class CrimeFragment extends Fragment
                 crime.setText(newText);
 
                 Log.d("TEST", "Changed crime text to " + crime.getText());
+                Log.d("TEST", crime.isSolved() ? "Solved" : "Not solved");
             }
 
             @Override
             public void afterTextChanged(Editable editable)
             {
+            }
+        });
+
+        this.dateButton.setText(this.crime.getDate().toString(DateTimeFormat.longDateTime()));
+
+        this.solvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked)
+            {
+                crime.setSolved(isChecked);
             }
         });
 
