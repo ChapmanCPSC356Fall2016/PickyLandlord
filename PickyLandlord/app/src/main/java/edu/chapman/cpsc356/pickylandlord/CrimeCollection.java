@@ -2,6 +2,7 @@ package edu.chapman.cpsc356.pickylandlord;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import edu.chapman.cpsc356.pickylandlord.models.CrimeModel;
 
@@ -33,7 +34,10 @@ public class CrimeCollection
         // for demonstration
         for (int i = 0; i < 100; ++i)
         {
-            this.crimes.add(new CrimeModel());
+            CrimeModel crime = new CrimeModel();
+            crime.setText("Crime #" + (i + 1));
+
+            this.crimes.add(crime);
         }
     }
 
@@ -42,6 +46,16 @@ public class CrimeCollection
         return this.crimes;
     }
 
-    //TODO:
-    // public CrimeModel getCrime
+    public CrimeModel getCrime(UUID id)
+    {
+        for (CrimeModel crime : this.crimes)
+        {
+            if (crime.getId().equals(id))
+            {
+                return crime;
+            }
+        }
+
+        return null;
+    }
 }
