@@ -36,6 +36,7 @@ public class CrimeCollection
         {
             CrimeModel crime = new CrimeModel();
             crime.setText("Crime #" + (i + 1));
+            crime.setSolved(i % 2 == 0);
 
             this.crimes.add(crime);
         }

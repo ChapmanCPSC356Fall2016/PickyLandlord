@@ -1,5 +1,6 @@
 package edu.chapman.cpsc356.pickylandlord.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,12 +10,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.List;
 
 import edu.chapman.cpsc356.pickylandlord.CrimeCollection;
 import edu.chapman.cpsc356.pickylandlord.R;
+import edu.chapman.cpsc356.pickylandlord.activities.CrimeActivity;
 import edu.chapman.cpsc356.pickylandlord.models.CrimeModel;
 
 /**
@@ -23,6 +26,7 @@ import edu.chapman.cpsc356.pickylandlord.models.CrimeModel;
 
 public class CrimeListFragment extends Fragment
 {
+    public static final String EXTRA_CRIME_ID = "crime_id";
 
     private RecyclerView crimesListView;
 
@@ -42,20 +46,38 @@ public class CrimeListFragment extends Fragment
         return view;
     }
 
-    private class CrimeViewHolder extends RecyclerView.ViewHolder
+    private class CrimeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         private TextView titleTextView;
+        private CheckBox solvedCheckBox;
+
+        private CrimeModel crime;
 
         public CrimeViewHolder(View itemView)
         {
             super(itemView);
 
-            this.titleTextView = (TextView) itemView;
+            itemView.setOnClickListener(this);
+
+            this.titleTextView = (TextView) itemView.findViewById(R.id.tv_item_title);
+            this.solvedCheckBox = (CheckBox) itemView.findViewById(R.id.cb_item_solved);
         }
 
         public void populate(CrimeModel crime)
         {
+            this.crime = crime;
+
             this.titleTextView.setText(crime.getText());
+            this.solvedCheckBox.setChecked(crime.isSolved());
+        }
+
+        @Override
+        public void onClick(View view)
+        {
+            Intent crimeIntent = new Intent(getActivity(), CrimeActivity.class);
+            crimeIntent.putExtra(EXTRA_CRIME_ID, this.crime.getId());
+
+            startActivity(crimeIntent);
         }
     }
 
@@ -72,7 +94,7 @@ public class CrimeListFragment extends Fragment
         public CrimeViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
         {
             LayoutInflater inflater = LayoutInflater.from(getActivity());
-            View holderView = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+            View holderView = inflater.inflate(R.layout.item_crime, parent, false);
 
             return new CrimeViewHolder(holderView);
         }
