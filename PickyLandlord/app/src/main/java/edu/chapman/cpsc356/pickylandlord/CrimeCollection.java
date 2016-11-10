@@ -59,4 +59,9 @@ public class CrimeCollection
 
         return null;
     }
+
+    public void addCrime(CrimeModel crime)
+    {
+        this.crimes.add(crime);
+    }
 }

@@ -25,6 +25,8 @@ import edu.chapman.cpsc356.pickylandlord.models.CrimeModel;
 
 public class CrimeFragment extends Fragment
 {
+    public static final String ARG_CRIME_ID = "crime_id";
+
     private CrimeModel crime;
 
     private EditText textEditText;
@@ -39,7 +41,8 @@ public class CrimeFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        UUID crimeId = (UUID) getActivity().getIntent().getSerializableExtra(CrimeListFragment.EXTRA_CRIME_ID);
+        UUID crimeId = (UUID) this.getArguments().getSerializable(ARG_CRIME_ID);
+
         this.crime = CrimeCollection.Get().getCrime(crimeId);
 
         // Inflate view
