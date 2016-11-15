@@ -64,4 +64,9 @@ public class CrimeCollection
     {
         this.crimes.add(crime);
     }
+
+    public void deleteCrime(CrimeModel crime)
+    {
+        this.crimes.remove(crime);
+    }
 }
