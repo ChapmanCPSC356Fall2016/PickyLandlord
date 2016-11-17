@@ -1,9 +1,11 @@
 package edu.chapman.cpsc356.pickylandlord.fragments;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -109,8 +111,21 @@ public class CrimeFragment extends Fragment
         switch (item.getItemId())
         {
             case R.id.menu_delete:
-                CrimeCollection.Get().deleteCrime(this.crime);
-                getActivity().finish();
+                AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.delete_confirmation)
+                        .setMessage(R.string.delete_confirmation_message)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i)
+                            {
+                                CrimeCollection.Get().deleteCrime(crime);
+                                getActivity().finish();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null)
+                        .create();
+                dialog.show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -38,12 +38,26 @@ public class CrimeListFragment extends Fragment
 
         this.crimesListView = (RecyclerView) view.findViewById(R.id.rv_crimes);
 
-        CrimeAdapter crimeAdapter = new CrimeAdapter(CrimeCollection.Get().getCrimes());
-
-        this.crimesListView.setAdapter(crimeAdapter);
-        this.crimesListView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         return view;
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        if (this.crimesListView.getAdapter() == null)
+        {
+            CrimeAdapter crimeAdapter = new CrimeAdapter(CrimeCollection.Get().getCrimes());
+
+            this.crimesListView.setAdapter(crimeAdapter);
+            this.crimesListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        }
+        else
+        {
+            this.crimesListView.getAdapter().notifyDataSetChanged();
+        }
+
     }
 
     private class CrimeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
