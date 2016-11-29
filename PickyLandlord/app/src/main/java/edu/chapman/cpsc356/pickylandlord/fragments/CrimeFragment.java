@@ -2,6 +2,7 @@ package edu.chapman.cpsc356.pickylandlord.fragments;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -126,6 +127,23 @@ public class CrimeFragment extends Fragment
                         .setNegativeButton(android.R.string.no, null)
                         .create();
                 dialog.show();
+                return true;
+            case R.id.menu_share:
+
+                String display = String.format("%s on %s (%s)",
+                        this.crime.getText(),
+                        this.crime.getDate().toString(DateTimeFormat.mediumDate()),
+                        (this.crime.isSolved() ? "Solved" : "Unsolved")
+                );
+
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, display);
+
+                shareIntent.setType("text/plain");
+
+                startActivity(shareIntent);
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

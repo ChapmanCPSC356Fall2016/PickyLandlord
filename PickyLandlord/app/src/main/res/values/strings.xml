@@ -8,4 +8,5 @@
     <string name="delete">Delete</string>
     <string name="delete_confirmation">Delete Confirmation</string>
     <string name="delete_confirmation_message">Are you sure you want to delete this crime?</string>
+    <string name="share">Share</string>
 </resources>

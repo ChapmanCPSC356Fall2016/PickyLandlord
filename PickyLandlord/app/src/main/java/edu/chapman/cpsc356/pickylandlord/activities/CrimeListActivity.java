@@ -30,7 +30,7 @@ public class CrimeListActivity extends SingleFragmentActivity
         switch (item.getItemId())
         {
             case R.id.menu_add:
-                startActivity(new Intent(this, CrimeActivity.class));
+                startActivity(new Intent(this, CrimePagerActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

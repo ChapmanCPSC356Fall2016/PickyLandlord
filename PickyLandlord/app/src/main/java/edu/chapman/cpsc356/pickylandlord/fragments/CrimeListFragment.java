@@ -18,6 +18,7 @@ import java.util.List;
 import edu.chapman.cpsc356.pickylandlord.CrimeCollection;
 import edu.chapman.cpsc356.pickylandlord.R;
 import edu.chapman.cpsc356.pickylandlord.activities.CrimeActivity;
+import edu.chapman.cpsc356.pickylandlord.activities.CrimePagerActivity;
 import edu.chapman.cpsc356.pickylandlord.models.CrimeModel;
 
 /**
@@ -88,7 +89,7 @@ public class CrimeListFragment extends Fragment
         @Override
         public void onClick(View view)
         {
-            Intent crimeIntent = new Intent(getActivity(), CrimeActivity.class);
+            Intent crimeIntent = new Intent(getActivity(), CrimePagerActivity.class);
             crimeIntent.putExtra(EXTRA_CRIME_ID, this.crime.getId());
 
             startActivity(crimeIntent);
