@@ -17,7 +17,6 @@ import java.util.List;
 
 import edu.chapman.cpsc356.pickylandlord.CrimeCollection;
 import edu.chapman.cpsc356.pickylandlord.R;
-import edu.chapman.cpsc356.pickylandlord.activities.CrimeActivity;
 import edu.chapman.cpsc356.pickylandlord.activities.CrimePagerActivity;
 import edu.chapman.cpsc356.pickylandlord.models.CrimeModel;
 

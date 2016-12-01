@@ -9,4 +9,11 @@
         android:id="@+id/menu_add"
         />
 
+    <item
+        android:title="@string/settings"
+        android:icon="@drawable/ic_menu_settings"
+        app:showAsAction="ifRoom|withText"
+        android:id="@+id/menu_settings"
+        />
+
 </menu>

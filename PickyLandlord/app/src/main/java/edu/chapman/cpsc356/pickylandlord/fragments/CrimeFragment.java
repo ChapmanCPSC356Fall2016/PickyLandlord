@@ -3,7 +3,9 @@ package edu.chapman.cpsc356.pickylandlord.fragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -27,6 +29,7 @@ import java.util.UUID;
 
 import edu.chapman.cpsc356.pickylandlord.CrimeCollection;
 import edu.chapman.cpsc356.pickylandlord.R;
+import edu.chapman.cpsc356.pickylandlord.activities.SettingsActivity;
 import edu.chapman.cpsc356.pickylandlord.models.CrimeModel;
 
 public class CrimeFragment extends Fragment
@@ -130,7 +133,18 @@ public class CrimeFragment extends Fragment
                 return true;
             case R.id.menu_share:
 
-                String display = String.format("%s on %s (%s)",
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+                String signature = prefs.getString(SettingsActivity.PREF_SIGNATURE, "");
+
+                String display = "";
+
+                if (!signature.isEmpty())
+                {
+                    display += signature + "\n";
+                }
+
+                display += String.format("%s on %s (%s)",
                         this.crime.getText(),
                         this.crime.getDate().toString(DateTimeFormat.mediumDate()),
                         (this.crime.isSolved() ? "Solved" : "Unsolved")
